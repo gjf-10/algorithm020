@@ -1,6 +1,4 @@
-Trie树
-
-```
+"""
 1. 对比哈希表和Trie树
 哈希表虽然能在O(1)时间内寻找键值， 但却不能做：
     a. 找到具有同一前缀的全部键值
@@ -28,7 +26,7 @@ search:
 
 查找Trie树中的前缀
     和搜索键相似，区别，到达键前缀的末尾时，总返回true，不用考虑isEnd标记。
-
+"""
 class Trie:
 
     def __init__(self):
@@ -56,63 +54,4 @@ class Trie:
                 return False
             node = node[char]
         return True
-```
-
-并查集
-
-```python
-"""
-1. makeSet(s): 新建一个集合, 其中包含s这个单元素集合 	p = [i for i in range(n)] 
-2. unionSet(x, y): 把元素x和元素y所在的集合合并，要求x和y所在的集合不相交，如果相交则不合并。
-3. find(x): 找到元素x所在的集合的代表，该操作也可以用于判断两个元素是否位于同一个集合，只要将它们各自的代表比较一下就可以了。
-
-开始：有个parent的数组，它是一个指向自己，表示它自己就是自己的集合
-合并：找到a, b两个集合的领头元素a1，b1，然后将parent[a1] 指向b1，或者将parent[b1] 指向 a1。
-"""
-
-# Python 
-def init(p): 	
-    # for i = 0 .. n: p[i] = i; 	
-    p = [i for i in range(n)]  
-    
-def union(self, p, i, j): 	
-    p1 = self.parent(p, i) 	
-    p2 = self.parent(p, j) 	
-    p[p1] = p2  
-    
-def parent(self, p, i): 	
-    root = i 	
-    while p[root] != root: 		
-        root = p[root] 	
-    while p[i] != i: # 路径压缩 ?		
-        i, p[i] = p[i], root 	
-    return root
-
-# 朋友圈问题
-class solution1:
-    def findCircleNum(self, isConnected):
-        if not isConnected: return 0
-
-        n = len(isConnected)
-        p = [i for i in range(n)]
-
-        for i in range(n):
-            for j in range(i, n):
-                if isConnected[i][j] == 1:
-                    self._union(p, i, j)
-        return len(set(self._parent(p, i) for i in range(n)))
-
-    def _union(self, p, i, j):
-        p1 = self._parent(p, i)
-        p2 = self._parent(p, j)
-        p[p2] = p1
-
-    def _parent(self, p, i):
-        root = i
-        while p[root] != root:
-            root = p[root]
-        while p[i] != i:
-            i, p[i] = p[i], root
-        return root
-```
 
